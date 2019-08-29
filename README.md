@@ -12,15 +12,13 @@ The edirect method had several shortcomings, namely the time it took to retrieve
 # Tutorial
 The following steps will guide you through how to set up and run this pipeline
 
-1) Activate your environment if desired. I used ddocent_env (http://www.ddocent.com/bioconda/), which contains many of the tools necessary.
+1) Install the conda environment.
 ```
-source activate ddocent_env
+conda env create -f nifHextract.yaml
+conda activate nifHextract 
 ```
-2) Download additional dependencies if necessary (requirements.txt). 
-```
-pip install cd-hit-auxtools
-```
-3) Make relevant file-of-file-names for your local database you are searching.
+
+2) Make relevant file-of-file-names for your local database you are searching.
 
 Here is an example of a fofn file `Klebsiella_genomes.fofn`
 ```
@@ -28,7 +26,7 @@ data/home/user/nuccore/570_1.fasta
 data/home/user/nuccore/570_2.fasta
 data/home/user/nuccore/570_3.fasta
 ```
-4) Create Configuration File. Below are each label, and what they are used for. Those with a * are mandatory. The others have default values. 
+3) Create Configuration File. Below are each label, and what they are used for. Those with a * are mandatory. The others have default values. 
 - PREFIX * will be used to name all intermediate and output files and directories.
 - DBFILE * file path to your existing database in fasta format. The ID of each sequence is in the form `Accession;cluster;organism_name`
 - NUCCORE * file path to a text file containing file paths to all relevant (unzipped) fasta files of your local database you are searching from, even if it is a single fasta file
@@ -46,7 +44,7 @@ NUCCORE    /Users/nifH_extract/Klebsiella_genomes.fofn
 MIN_MINIMAP_ALIGNLEN 300
 ```
 
-5) Run the following command in your desired directory.
+4) Run the following command in your desired directory.
 
 ```
 $ path/to/nifHUpdate_Lib/nifHUpdate_caller.py my_config.txt my_log_file_name.txt
@@ -60,7 +58,7 @@ $ path/to/nifHUpdate_Lib/nifHUpdate_caller.py my_config.txt my_log_file_name.txt
 ```
 Available stages are listed below. Running the command without the `-s` option will default to rerunning the pipeline from the beginning. It is recommended that if you want to save the result of each run, instead of rerunning with the same prefix, make a new configuration file with a different prefix label. 
 
-6) The resulting clusters are found in the directory `clusters_dedup`, and a simple summary of the number of sequences in each fasta file created can be found in your log file you named in the initial command.
+5) The resulting clusters are found in the directory `clusters_dedup`, and a simple summary of the number of sequences in each fasta file created can be found in your log file you named in the initial command.
 
 ### Stages
 The following stages are listed in order in which they are performed.

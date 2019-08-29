@@ -12,4 +12,5 @@ Klebsiella*
 proteobacteria_refSeq*
 *.paf
 M*
+.DS_Store
 nifHupdate_Lib/__pycache__
